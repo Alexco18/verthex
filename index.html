@@ -987,6 +987,20 @@
     color: #6b7280;
     display: none;
   }
+
+  .chatbot-suggestions {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .chatbot-suggestion {
+    padding: 8px;
+    background: #F3F4F6;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+  }
 </style>
 
 <div class="chatbot-button" id="chatbotBtn">💬</div>
@@ -1002,6 +1016,13 @@
   <div class="chatbot-buttons" id="chatbotStep2" style="display:none;">
     <button class="chatbot-btn" onclick="chooseLang('fr')">Français</button>
     <button class="chatbot-btn" onclick="chooseLang('en')">English</button>
+  </div>
+
+  <div class="chatbot-suggestions" id="chatbotSuggestions">
+    <div class="chatbot-suggestion" onclick="quickReply('concept')">Où trouver le concept ?</div>
+    <div class="chatbot-suggestion" onclick="quickReply('solutions')">Quelles sont les solutions ?</div>
+    <div class="chatbot-suggestion" onclick="quickReply('contact')">Comment vous contacter ?</div>
+    <div class="chatbot-suggestion" onclick="quickReply('social')">Où voir les réseaux sociaux ?</div>
   </div>
 
   <div class="chatbot-input" id="chatbotInput">
@@ -1020,12 +1041,26 @@
   const chatbotStep2 = document.getElementById("chatbotStep2");
   const chatbotInput = document.getElementById("chatbotInput");
   const chatbotResponse = document.getElementById("chatbotResponse");
+  const chatbotSuggestions = document.getElementById("chatbotSuggestions");
 
   let chatbotLang = "fr";
 
+  function resetChatbot() {
+    chatbotHeader.textContent = "Bonjour, besoin d’aide ?";
+    chatbotStep1.style.display = "flex";
+    chatbotStep2.style.display = "none";
+    chatbotInput.style.display = "none";
+    chatbotSuggestions.style.display = "none";
+    chatbotResponse.style.display = "none";
+  }
+
   chatbotBtn.onclick = () => {
-    chatbotWindow.style.display =
-      chatbotWindow.style.display === "flex" ? "none" : "flex";
+    if (chatbotWindow.style.display === "flex") {
+      chatbotWindow.style.display = "none";
+    } else {
+      chatbotWindow.style.display = "flex";
+      resetChatbot();
+    }
   };
 
   function chatbotYes() {
@@ -1035,35 +1070,84 @@
   }
 
   function chatbotNo() {
-    chatbotHeader.textContent = "D’accord, je reste disponible.";
-    chatbotStep1.style.display = "none";
+    chatbotWindow.style.display = "none";
   }
 
   function chooseLang(lang) {
     chatbotLang = lang;
     chatbotStep2.style.display = "none";
     chatbotInput.style.display = "flex";
+    chatbotSuggestions.style.display = "flex";
     chatbotHeader.textContent =
       lang === "fr" ? "Comment puis-je vous aider ?" : "How can I help you?";
+  }
+
+  function quickReply(keyword) {
+    chatbotResponse.style.display = "block";
+
+    const responses = {
+      fr: {
+        concept: "La section Concept se trouve plus haut sur la page.",
+        solutions: "Les solutions sont dans la section 'Les premières solutions VERTHEX'.",
+        contact: "Le formulaire de contact est en bas de la page.",
+        social: "Les réseaux sociaux sont dans la section 'Suivez-nous'."
+      },
+      en: {
+        concept: "The Concept section is located higher on the page.",
+        solutions: "Solutions are listed in the 'VERTHEX Solutions' section.",
+        contact: "The contact form is at the bottom of the page.",
+        social: "Social networks are in the 'Follow us' section."
+      }
+    };
+
+    chatbotResponse.textContent = responses[chatbotLang][keyword];
   }
 
   function sendChatbot() {
     const question = document.getElementById("chatbotQuestion").value.toLowerCase();
     chatbotResponse.style.display = "block";
 
-    if (chatbotLang === "fr") {
-      if (question.includes("concept")) chatbotResponse.textContent = "Vous pouvez découvrir le concept ici : section 'Le concept VERTHEX'.";
-      else if (question.includes("solution")) chatbotResponse.textContent = "Les solutions sont listées dans la section 'Les premières solutions VERTHEX'.";
-      else if (question.includes("contact")) chatbotResponse.textContent = "Le formulaire de contact est en bas de la page.";
-      else chatbotResponse.textContent = "Je ne suis pas sûr, mais je peux vous guider : Concept, Solutions, Réseaux sociaux, Contact.";
-    } else {
-      if (question.includes("concept")) chatbotResponse.textContent = "You can discover the concept in the 'VERTHEX Concept' section.";
-      else if (question.includes("solution")) chatbotResponse.textContent = "Solutions are listed in the 'VERTHEX Solutions' section.";
-      else if (question.includes("contact")) chatbotResponse.textContent = "The contact form is at the bottom of the page.";
-      else chatbotResponse.textContent = "I’m not sure, but I can guide you: Concept, Solutions, Socials, Contact.";
+    // Suggestions automatiques
+    if (question.includes("concept")) {
+      chatbotResponse.textContent =
+        chatbotLang === "fr"
+          ? "Voulez-vous accéder à la section Concept ?"
+          : "Do you want to access the Concept section?";
+      return;
     }
+
+    if (question.includes("solution")) {
+      chatbotResponse.textContent =
+        chatbotLang === "fr"
+          ? "Souhaitez-vous voir les solutions proposées ?"
+          : "Do you want to see the available solutions?";
+      return;
+    }
+
+    if (question.includes("contact")) {
+      chatbotResponse.textContent =
+        chatbotLang === "fr"
+          ? "Voulez-vous accéder au formulaire de contact ?"
+          : "Do you want to access the contact form?";
+      return;
+    }
+
+    if (question.includes("réseau") || question.includes("social")) {
+      chatbotResponse.textContent =
+        chatbotLang === "fr"
+          ? "Voulez-vous voir la section Réseaux sociaux ?"
+          : "Do you want to see the Social networks section?";
+      return;
+    }
+
+    // Réponse générique
+    chatbotResponse.textContent =
+      chatbotLang === "fr"
+        ? "Je peux vous aider avec : Concept, Solutions, Réseaux sociaux, Contact."
+        : "I can help you with: Concept, Solutions, Socials, Contact.";
   }
 </script>
+
 
 </body>
 </html>
