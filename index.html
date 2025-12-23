@@ -79,6 +79,19 @@
       mix-blend-mode: screen;
     }
 
+    .logo-text-main {
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      font-size: 14px;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
     nav {
       display: flex;
       align-items: center;
@@ -124,6 +137,10 @@
       box-shadow: 0 10px 30px rgba(15,23,42,0.06);
     }
 
+    .nav-cta span {
+      font-size: 14px;
+    }
+
     /* Layout principal */
 
     main {
@@ -152,11 +169,27 @@
       backdrop-filter: blur(10px);
     }
 
+    .eyebrow-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 12px;
+    }
+
     h1 {
       font-size: clamp(34px, 4vw, 40px);
       line-height: 1.05;
       letter-spacing: -0.03em;
       margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--primary);
     }
 
     .hero-subtitle {
@@ -215,6 +248,210 @@
       color: var(--text-muted);
     }
 
+    .hero-meta strong {
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    /* Hero droite : carte produit */
+
+    .hero-card {
+      background: var(--bg-alt);
+      border-radius: 32px;
+      padding: 22px 22px 20px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-tag {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(224,239,233,0.9);
+      color: var(--primary);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .hero-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .hero-card-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .hero-card-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .card-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: #050816;
+      color: #e5f5ea;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-badge-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+    }
+
+    .hero-card-visual {
+      margin: 6px 0 14px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .farm-module {
+      border-radius: 24px;
+      background: radial-gradient(circle at top, #e8f7ec 0, #d9efe4 25%, #cfe6dc 60%, #b6d7c9 100%);
+      padding: 16px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .farm-shelves {
+      border-radius: 18px;
+      background: rgba(255,255,255,0.6);
+      padding: 10px;
+      display: grid;
+      gap: 7px;
+      box-shadow: 0 10px 28px rgba(15,23,42,0.12);
+    }
+
+    .farm-shelf {
+      border-radius: 10px;
+      padding: 6px 7px;
+      display: flex;
+      gap: 4px;
+      background: rgba(245,247,246,0.92);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .farm-shelf::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 10%, rgba(255,255,255,0.7) 60%, transparent 90%);
+      opacity: 0.3;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .plant {
+      flex: 1;
+      height: 20px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #8fce96, #5fae7e);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plant:nth-child(2) {
+      background: linear-gradient(90deg, #9bd08c, #6fbe88);
+    }
+
+    .plant:nth-child(3) {
+      background: linear-gradient(90deg, #7fba89, #4f976d);
+    }
+
+    .plant::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.7), transparent 60%);
+      opacity: 0.5;
+    }
+
+    .farm-module-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .farm-module-tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .farm-module-tag-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #34d399;
+    }
+
+    .hero-card-side {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hero-card-stat {
+      padding: 10px 11px;
+      border-radius: 14px;
+      background: rgba(245,247,246,0.9);
+    }
+
+    .hero-card-stat strong {
+      display: block;
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .hero-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-card-bottom span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-card-bottom strong {
+      color: var(--text-main);
+      font-size: 12px;
+    }
+
     /* Section points clés */
 
     .section {
@@ -261,7 +498,25 @@
       font-size: 13px;
     }
 
-    /* Section contact */
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Section contact simple */
 
     .contact {
       margin-top: 48px;
@@ -273,6 +528,24 @@
       justify-content: space-between;
       align-items: center;
       gap: 18px;
+    }
+
+    .contact h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .contact p {
+      font-size: 13px;
+      color: rgba(226,232,240,0.8);
+      max-width: 400px;
+    }
+
+    .contact form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
     }
 
     .contact input {
@@ -296,19 +569,49 @@
       cursor: pointer;
     }
 
+    /* Responsive */
+
     @media (max-width: 900px) {
       main {
         grid-template-columns: minmax(0,1fr);
       }
-      nav { display: none; }
+
+      .hero-card {
+        order: -1;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding-inline: 16px;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .contact {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
     }
   </style>
 </head>
-
 <body>
   <div class="page">
-
-    <!-- HEADER -->
     <header>
       <div class="logo">
         <div class="logo-icon"></div>
@@ -321,52 +624,229 @@
         <a href="#concept">Concept</a>
         <a href="#solutions">Solutions</a>
         <a href="#social">Suivez-nous</a>
-        <a href="#contact" class="nav-cta">Découvrir VERTHEX <span>↗</span></a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">
+          Découvrir VERTHEX
+          <span>↗</span>
+        </a>
       </nav>
     </header>
 
-    <!-- HERO -->
     <main>
+      <!-- Colonne texte -->
       <section>
         <div class="eyebrow">
           <div class="eyebrow-dot">◎</div>
           Fermes urbaines pour appartements
         </div>
-
         <h1>
           Faites pousser <span>votre potager</span><br>
           sans quitter votre salon.
         </h1>
-
         <p class="hero-subtitle">
           VERTHEX conçoit des fermes urbaines modulaires, silencieuses et esthétiques,
-          pensées pour les espaces restreints.
+          pensées pour les espaces restreints. Cultivez vos herbes, feuilles et micro-pousses
+          à l’année, directement chez vous.
         </p>
 
         <div class="hero-actions">
-          <button class="btn-primary">Je veux voir la solution →</button>
-          <button class="btn-secondary">Comprendre le concept</button>
+          <button class="btn-primary">
+            Je veux voir la solution
+            <span>→</span>
+          </button>
+          <button class="btn-secondary">
+            Comprendre le concept
+          </button>
 
-          <!-- BOUTON MAILTO -->
-          <a href="mailto:contact@verthex.com?subject=Demande%20d'information" class="btn-primary">
-            Faire une demande →
+          <!-- Bouton mailto pour envoyer une demande -->
+          <a href="mailto:contact@verthex.com?subject=Demande%20d'information%20VERTHEX" class="btn-secondary">
+            Faire une demande
           </a>
+        </div>
+
+        <div class="hero-meta">
+          <div>
+            <strong>+12 variétés</strong><br>
+            Herbes, salades, micro-pousses
+          </div>
+          <div>
+            <strong>&lt; 1 m²</strong><br>
+            Adapté aux petits espaces
+          </div>
+          <div>
+            <strong>0 terre</strong><br>
+            Technologie propre & contrôlée
+          </div>
         </div>
       </section>
 
-      <!-- HERO VISUEL (inchangé) -->
+      <!-- Colonne visuel / produit -->
       <section>
-        <!-- ... ton code existant ... -->
+        <div class="hero-card">
+          <div class="hero-card-tag">Prototype VERTHEX • V1</div>
+
+          <div class="hero-card-top">
+            <div>
+              <div class="hero-card-title">Module vertical pour salon</div>
+              <div class="hero-card-sub">
+                Une ferme compacte, silencieuse et autonome,
+                pensée pour s’intégrer à votre intérieur.
+              </div>
+            </div>
+            <div class="card-badge">
+              <div class="card-badge-dot">✺</div>
+              Premier aperçu produit
+            </div>
+          </div>
+
+          <div class="hero-card-visual">
+            <div class="farm-module">
+              <div class="farm-shelves">
+                <div class="farm-shelf">
+                  <div class="plant"></div>
+                  <div class="plant"></div>
+                  <div class="plant"></div>
+                </div>
+                <div class="farm-shelf">
+                  <div class="plant"></div>
+                  <div class="plant"></div>
+                  <div class="plant"></div>
+                </div>
+                <div class="farm-shelf">
+                  <div class="plant"></div>
+                  <div class="plant"></div>
+                  <div class="plant"></div>
+                </div>
+              </div>
+              <div class="farm-module-footer">
+                <div class="farm-module-tag">
+                  <div class="farm-module-tag-dot"></div>
+                  Cycle autonome de 6 à 8 semaines
+                </div>
+                <span>Éclairage, eau & nutriments intégrés</span>
+              </div>
+            </div>
+            <div class="hero-card-side">
+              <div class="hero-card-stat">
+                <strong>4×</strong>
+                Plus de récoltes que sur un balcon,
+                pour une surface au sol minimale.
+              </div>
+              <div class="hero-card-stat">
+                <strong>Silencieux</strong>
+                Pensé pour le quotidien : nuit, télétravail, vie de famille.
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card-bottom">
+            <span>
+              • Phase actuelle :
+              <strong>conception et tests à domicile</strong>
+            </span>
+            <span>
+              Intéressé pour les premiers prototypes ?
+              <strong>Laissez votre email plus bas.</strong>
+            </span>
+          </div>
+        </div>
       </section>
     </main>
 
-    <!-- SECTION CONCEPT (inchangée) -->
-    <!-- ... -->
+    <!-- Section concept -->
+    <section id="concept" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Le concept VERTHEX</div>
+          <h2 class="section-title">Cultiver en ville, sans compromis.</h2>
+        </div>
+        <p class="section-desc">
+          VERTHEX repense le potager pour les espaces urbains : des modules
+          verticaux, modulaires et silencieux, qui s’intègrent dans un salon,
+          une cuisine ou un bureau sans envahir l’espace.
+        </p>
+      </div>
 
-    <!-- SECTION SOLUTIONS (inchangée) -->
-    <!-- ... -->
+      <div class="grid-3">
+        <article class="card">
+          <div class="card-label">Espace</div>
+          <div class="card-title">Optimisé pour les appartements</div>
+          <p>
+            Chaque module occupe moins d’un mètre carré au sol, tout en
+            proposant plusieurs niveaux de culture. L’objectif : maximiser
+            la surface cultivable, pas l’encombrement.
+          </p>
+        </article>
 
-    <!-- 🌿 NOUVELLE SECTION : SUIVEZ-NOUS -->
+        <article class="card">
+          <div class="card-label">Usage</div>
+          <div class="card-title">Pensé pour le quotidien</div>
+          <p>
+            Remplir le réservoir, insérer les capsules, récolter. VERTHEX
+            vise une expérience simple, guidée et calme, que l’on oublie
+            jusqu’au moment de cuisiner.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Design</div>
+          <div class="card-title">Objet décoratif avant tout</div>
+          <p>
+            L’esthétique est au cœur du projet : lignes sobres, lumière douce,
+            matériaux qualitatifs. Une pièce qui a sa place dans un intérieur
+            moderne.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section solutions -->
+    <section id="solutions" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Prochaines étapes</div>
+          <h2 class="section-title">Les premières solutions VERTHEX.</h2>
+        </div>
+        <p class="section-desc">
+          La gamme se construit autour de modules verticaux pour particuliers,
+          avec à terme des solutions pour les bureaux et les espaces partagés.
+          Cette section évoluera au fil du développement produit.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <div class="card-label">Module 01</div>
+          <div class="card-title">VERTHEX • Salon</div>
+          <p>
+            Un module vertical compact, conçu pour se placer contre un mur
+            de salon ou de cuisine. Idéal pour les herbes aromatiques et
+            les salades du quotidien.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Module 02</div>
+          <div class="card-title">VERTHEX • Bureau</div>
+          <p>
+            Une version plus discrète, adaptée aux espaces de travail ou
+            aux petits studios. Luminosité douce, entretien minimal.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-label">À venir</div>
+          <div class="card-title">Capsules & variétés</div>
+          <p>
+            Un catalogue de variétés sélectionnées pour la culture en intérieur :
+            basilic, menthe, coriandre, jeunes pousses… et d’autres à définir
+            avec la communauté.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Nouvelle section réseaux sociaux -->
     <section id="social" class="section">
       <div class="section-header">
         <div>
@@ -374,7 +854,8 @@
           <h2 class="section-title">Suivez l’aventure VERTHEX.</h2>
         </div>
         <p class="section-desc">
-          Découvrez les coulisses du projet, les prototypes, les tests et les futures annonces.
+          Découvrez les coulisses du projet, les prototypes, les tests à domicile
+          et les prochaines étapes du développement.
         </p>
       </div>
 
@@ -382,35 +863,46 @@
         <article class="card">
           <div class="card-label">LinkedIn</div>
           <div class="card-title">Actualités & développement</div>
-          <p>Suivez les étapes du projet et les annonces officielles.</p>
+          <p>
+            Suivez les annonces, les partenariats et l’avancement du projet.
+            Idéal pour rester informé de la vision long terme.
+          </p>
         </article>
 
         <article class="card">
           <div class="card-label">Instagram</div>
           <div class="card-title">Design & coulisses</div>
-          <p>Photos, prototypes, inspirations et ambiance du projet.</p>
+          <p>
+            Prototypes, détails de design, ambiances lumineuses et mises en situation
+            dans de vrais intérieurs urbains.
+          </p>
         </article>
 
         <article class="card">
           <div class="card-label">TikTok</div>
-          <div class="card-title">Formats courts</div>
-          <p>Démo des modules, tests, récoltes et contenus rapides.</p>
+          <div class="card-title">Formats courts & démos</div>
+          <p>
+            Tests en direct, cycles de culture accélérés, petites astuces de culture
+            en intérieur et moments du quotidien.
+          </p>
         </article>
       </div>
     </section>
 
-    <!-- SECTION CONTACT -->
+    <!-- Section contact -->
     <section id="contact" class="contact">
       <div>
         <h3>Envie de suivre le projet VERTHEX ?</h3>
-        <p>Laissez votre email pour être informé des avancées.</p>
+        <p>
+          VERTHEX est en phase de conception. Laissez votre email pour être informé
+          des avancées, des premiers prototypes et des éventuelles pré-commandes.
+        </p>
       </div>
       <form>
         <input type="email" placeholder="Votre email" required>
         <button type="submit">Me tenir informé</button>
       </form>
     </section>
-
   </div>
 </body>
 </html>
