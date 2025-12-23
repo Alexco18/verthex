@@ -904,5 +904,166 @@
       </form>
     </section>
   </div>
+  <!-- CHATBOT FLOTTANT -->
+<style>
+  .chatbot-button {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #3A7C63;
+    color: white;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(15,23,42,0.25);
+    z-index: 9999;
+  }
+
+  .chatbot-window {
+    position: fixed;
+    bottom: 100px;
+    right: 24px;
+    width: 300px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(15,23,42,0.18);
+    padding: 16px;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+  }
+
+  .chatbot-header {
+    font-weight: 600;
+    font-size: 15px;
+    color: #1f2933;
+  }
+
+  .chatbot-buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  .chatbot-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #E0EFE9;
+    color: #1f2933;
+    font-size: 13px;
+  }
+
+  .chatbot-input {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .chatbot-input input {
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+  }
+
+  .chatbot-input button {
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    background: #3A7C63;
+    color: white;
+    cursor: pointer;
+  }
+
+  .chatbot-response {
+    font-size: 13px;
+    color: #6b7280;
+    display: none;
+  }
+</style>
+
+<div class="chatbot-button" id="chatbotBtn">💬</div>
+
+<div class="chatbot-window" id="chatbotWindow">
+  <div class="chatbot-header" id="chatbotHeader">Bonjour, besoin d’aide ?</div>
+
+  <div class="chatbot-buttons" id="chatbotStep1">
+    <button class="chatbot-btn" onclick="chatbotYes()">Oui</button>
+    <button class="chatbot-btn" onclick="chatbotNo()">Non</button>
+  </div>
+
+  <div class="chatbot-buttons" id="chatbotStep2" style="display:none;">
+    <button class="chatbot-btn" onclick="chooseLang('fr')">Français</button>
+    <button class="chatbot-btn" onclick="chooseLang('en')">English</button>
+  </div>
+
+  <div class="chatbot-input" id="chatbotInput">
+    <input type="text" id="chatbotQuestion" placeholder="Posez votre question...">
+    <button onclick="sendChatbot()">Envoyer</button>
+  </div>
+
+  <div class="chatbot-response" id="chatbotResponse"></div>
+</div>
+
+<script>
+  const chatbotBtn = document.getElementById("chatbotBtn");
+  const chatbotWindow = document.getElementById("chatbotWindow");
+  const chatbotHeader = document.getElementById("chatbotHeader");
+  const chatbotStep1 = document.getElementById("chatbotStep1");
+  const chatbotStep2 = document.getElementById("chatbotStep2");
+  const chatbotInput = document.getElementById("chatbotInput");
+  const chatbotResponse = document.getElementById("chatbotResponse");
+
+  let chatbotLang = "fr";
+
+  chatbotBtn.onclick = () => {
+    chatbotWindow.style.display =
+      chatbotWindow.style.display === "flex" ? "none" : "flex";
+  };
+
+  function chatbotYes() {
+    chatbotHeader.textContent = "Choisissez votre langue :";
+    chatbotStep1.style.display = "none";
+    chatbotStep2.style.display = "flex";
+  }
+
+  function chatbotNo() {
+    chatbotHeader.textContent = "D’accord, je reste disponible.";
+    chatbotStep1.style.display = "none";
+  }
+
+  function chooseLang(lang) {
+    chatbotLang = lang;
+    chatbotStep2.style.display = "none";
+    chatbotInput.style.display = "flex";
+    chatbotHeader.textContent =
+      lang === "fr" ? "Comment puis-je vous aider ?" : "How can I help you?";
+  }
+
+  function sendChatbot() {
+    const question = document.getElementById("chatbotQuestion").value.toLowerCase();
+    chatbotResponse.style.display = "block";
+
+    if (chatbotLang === "fr") {
+      if (question.includes("concept")) chatbotResponse.textContent = "Vous pouvez découvrir le concept ici : section 'Le concept VERTHEX'.";
+      else if (question.includes("solution")) chatbotResponse.textContent = "Les solutions sont listées dans la section 'Les premières solutions VERTHEX'.";
+      else if (question.includes("contact")) chatbotResponse.textContent = "Le formulaire de contact est en bas de la page.";
+      else chatbotResponse.textContent = "Je ne suis pas sûr, mais je peux vous guider : Concept, Solutions, Réseaux sociaux, Contact.";
+    } else {
+      if (question.includes("concept")) chatbotResponse.textContent = "You can discover the concept in the 'VERTHEX Concept' section.";
+      else if (question.includes("solution")) chatbotResponse.textContent = "Solutions are listed in the 'VERTHEX Solutions' section.";
+      else if (question.includes("contact")) chatbotResponse.textContent = "The contact form is at the bottom of the page.";
+      else chatbotResponse.textContent = "I’m not sure, but I can guide you: Concept, Solutions, Socials, Contact.";
+    }
+  }
+</script>
+
 </body>
 </html>
