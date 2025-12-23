@@ -904,7 +904,7 @@
       </form>
     </section>
   </div>
-  <!-- CHATBOT FLOTTANT -->
+ <!-- CHATBOT FLOTTANT -->
 <style>
   .chatbot-button {
     position: fixed;
@@ -1001,6 +1001,11 @@
     cursor: pointer;
     font-size: 13px;
   }
+
+  .chatbot-guide {
+    display: none;
+    gap: 8px;
+  }
 </style>
 
 <div class="chatbot-button" id="chatbotBtn">💬</div>
@@ -1018,16 +1023,16 @@
     <button class="chatbot-btn" onclick="chooseLang('en')">English</button>
   </div>
 
-  <div class="chatbot-suggestions" id="chatbotSuggestions">
-    <div class="chatbot-suggestion" onclick="quickReply('concept')">Où trouver le concept ?</div>
-    <div class="chatbot-suggestion" onclick="quickReply('solutions')">Quelles sont les solutions ?</div>
-    <div class="chatbot-suggestion" onclick="quickReply('contact')">Comment vous contacter ?</div>
-    <div class="chatbot-suggestion" onclick="quickReply('social')">Où voir les réseaux sociaux ?</div>
-  </div>
+  <div class="chatbot-suggestions" id="chatbotSuggestions"></div>
 
   <div class="chatbot-input" id="chatbotInput">
     <input type="text" id="chatbotQuestion" placeholder="Posez votre question...">
     <button onclick="sendChatbot()">Envoyer</button>
+  </div>
+
+  <div class="chatbot-guide" id="chatbotGuide">
+    <button class="chatbot-btn" onclick="guideYes()">Oui</button>
+    <button class="chatbot-btn" onclick="guideNo()">Non</button>
   </div>
 
   <div class="chatbot-response" id="chatbotResponse"></div>
@@ -1042,8 +1047,10 @@
   const chatbotInput = document.getElementById("chatbotInput");
   const chatbotResponse = document.getElementById("chatbotResponse");
   const chatbotSuggestions = document.getElementById("chatbotSuggestions");
+  const chatbotGuide = document.getElementById("chatbotGuide");
 
   let chatbotLang = "fr";
+  let pendingSection = null;
 
   function resetChatbot() {
     chatbotHeader.textContent = "Bonjour, besoin d’aide ?";
@@ -1051,7 +1058,9 @@
     chatbotStep2.style.display = "none";
     chatbotInput.style.display = "none";
     chatbotSuggestions.style.display = "none";
+    chatbotGuide.style.display = "none";
     chatbotResponse.style.display = "none";
+    pendingSection = null;
   }
 
   chatbotBtn.onclick = () => {
@@ -1078,75 +1087,94 @@
     chatbotStep2.style.display = "none";
     chatbotInput.style.display = "flex";
     chatbotSuggestions.style.display = "flex";
+
     chatbotHeader.textContent =
       lang === "fr" ? "Comment puis-je vous aider ?" : "How can I help you?";
+
+    chatbotSuggestions.innerHTML =
+      lang === "fr"
+        ? `
+      <div class="chatbot-suggestion" onclick="quickReply('concept')">Où trouver le concept ?</div>
+      <div class="chatbot-suggestion" onclick="quickReply('solutions')">Quelles sont les solutions ?</div>
+      <div class="chatbot-suggestion" onclick="quickReply('contact')">Comment vous contacter ?</div>
+      <div class="chatbot-suggestion" onclick="quickReply('social')">Où voir les réseaux sociaux ?</div>
+      `
+        : `
+      <div class="chatbot-suggestion" onclick="quickReply('concept')">Where is the concept section?</div>
+      <div class="chatbot-suggestion" onclick="quickReply('solutions')">What are the solutions?</div>
+      <div class="chatbot-suggestion" onclick="quickReply('contact')">How to contact you?</div>
+      <div class="chatbot-suggestion" onclick="quickReply('social')">Where are the social networks?</div>
+      `;
   }
 
   function quickReply(keyword) {
+    pendingSection = keyword;
     chatbotResponse.style.display = "block";
+    chatbotGuide.style.display = "flex";
 
     const responses = {
       fr: {
-        concept: "La section Concept se trouve plus haut sur la page.",
-        solutions: "Les solutions sont dans la section 'Les premières solutions VERTHEX'.",
-        contact: "Le formulaire de contact est en bas de la page.",
-        social: "Les réseaux sociaux sont dans la section 'Suivez-nous'."
+        concept: "La section Concept est plus haut. Voulez-vous que je vous y emmène ?",
+        solutions: "Les solutions sont listées plus bas. Je vous y emmène ?",
+        contact: "Le formulaire de contact est en bas. Souhaitez-vous y aller ?",
+        social: "Les réseaux sociaux sont juste avant le contact. Je vous guide ?"
       },
       en: {
-        concept: "The Concept section is located higher on the page.",
-        solutions: "Solutions are listed in the 'VERTHEX Solutions' section.",
-        contact: "The contact form is at the bottom of the page.",
-        social: "Social networks are in the 'Follow us' section."
+        concept: "The Concept section is above. Want me to take you there?",
+        solutions: "Solutions are listed below. Should I take you there?",
+        contact: "The contact form is at the bottom. Want to go there?",
+        social: "Social networks are just above contact. Should I guide you?"
       }
     };
 
     chatbotResponse.textContent = responses[chatbotLang][keyword];
   }
 
+  function guideYes() {
+    const anchors = {
+      concept: "#concept",
+      solutions: "#solutions",
+      contact: "#contact",
+      social: "#social"
+    };
+
+    if (pendingSection && anchors[pendingSection]) {
+      document.querySelector(anchors[pendingSection]).scrollIntoView({ behavior: "smooth" });
+    }
+
+    chatbotWindow.style.display = "none";
+  }
+
+  function guideNo() {
+    chatbotGuide.style.display = "none";
+    chatbotResponse.style.display = "none";
+  }
+
   function sendChatbot() {
     const question = document.getElementById("chatbotQuestion").value.toLowerCase();
     chatbotResponse.style.display = "block";
 
-    // Suggestions automatiques
-    if (question.includes("concept")) {
-      chatbotResponse.textContent =
-        chatbotLang === "fr"
-          ? "Voulez-vous accéder à la section Concept ?"
-          : "Do you want to access the Concept section?";
-      return;
+    const keywords = {
+      concept: ["concept"],
+      solutions: ["solution", "solutions"],
+      contact: ["contact"],
+      social: ["réseau", "social", "network"]
+    };
+
+    for (let key in keywords) {
+      if (keywords[key].some(word => question.includes(word))) {
+        quickReply(key);
+        return;
+      }
     }
 
-    if (question.includes("solution")) {
-      chatbotResponse.textContent =
-        chatbotLang === "fr"
-          ? "Souhaitez-vous voir les solutions proposées ?"
-          : "Do you want to see the available solutions?";
-      return;
-    }
-
-    if (question.includes("contact")) {
-      chatbotResponse.textContent =
-        chatbotLang === "fr"
-          ? "Voulez-vous accéder au formulaire de contact ?"
-          : "Do you want to access the contact form?";
-      return;
-    }
-
-    if (question.includes("réseau") || question.includes("social")) {
-      chatbotResponse.textContent =
-        chatbotLang === "fr"
-          ? "Voulez-vous voir la section Réseaux sociaux ?"
-          : "Do you want to see the Social networks section?";
-      return;
-    }
-
-    // Réponse générique
     chatbotResponse.textContent =
       chatbotLang === "fr"
         ? "Je peux vous aider avec : Concept, Solutions, Réseaux sociaux, Contact."
         : "I can help you with: Concept, Solutions, Socials, Contact.";
   }
 </script>
+
 
 
 </body>
