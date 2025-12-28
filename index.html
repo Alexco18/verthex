@@ -21,8 +21,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-                   "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
     }
 
     body {
@@ -41,8 +40,6 @@
       margin: 0 auto;
       padding: 24px 20px 64px;
     }
-
-    /* Header */
 
     header {
       display: flex;
@@ -141,8 +138,6 @@
       font-size: 14px;
     }
 
-    /* Layout principal */
-
     main {
       margin-top: 24px;
       display: grid;
@@ -150,8 +145,6 @@
       gap: 36px;
       align-items: center;
     }
-
-    /* Hero gauche */
 
     .eyebrow {
       display: inline-flex;
@@ -223,9 +216,14 @@
       align-items: center;
       gap: 8px;
       box-shadow: 0 16px 40px rgba(58,124,99,0.35);
+      transition: transform 0.2s ease;
     }
 
-   .btn-secondary {
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
       padding: 11px 18px;
       border-radius: 999px;
       border: 1px solid rgba(107,114,128,0.26);
@@ -238,6 +236,11 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
     }
 
     .hero-meta {
@@ -252,8 +255,6 @@
       font-size: 14px;
       color: var(--text-main);
     }
-
-    /* Hero droite : carte produit */
 
     .hero-card {
       background: var(--bg-alt);
@@ -452,36 +453,56 @@
       font-size: 12px;
     }
 
-    /* Section points clés */
-
     .section {
       margin-top: 56px;
+      position: relative;
+      padding: 32px 28px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, 
+        rgba(224, 239, 233, 0.5) 0%, 
+        rgba(224, 239, 233, 0.25) 40%,
+        rgba(232, 243, 236, 0.15) 70%,
+        rgba(245, 247, 246, 0.05) 100%);
+      border: 1px solid rgba(58, 124, 99, 0.08);
+      box-shadow: 0 8px 24px rgba(58, 124, 99, 0.04);
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      border-radius: 24px 0 0 24px;
     }
 
     .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-
-    .section-title {
-      font-size: 20px;
-      letter-spacing: -0.02em;
+      margin-bottom: 28px;
     }
 
     .section-kicker {
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.22em;
-      color: var(--text-muted);
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--text-main);
     }
 
     .section-desc {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-muted);
-      max-width: 420px;
+      max-width: 720px;
+      line-height: 1.6;
     }
 
     .grid-3 {
@@ -515,8 +536,6 @@
       color: var(--text-muted);
       line-height: 1.5;
     }
-
-    /* Section contact simple */
 
     .contact {
       margin-top: 48px;
@@ -567,9 +586,189 @@
       text-transform: uppercase;
       letter-spacing: 0.14em;
       cursor: pointer;
+      transition: transform 0.2s ease;
     }
 
-    /* Responsive */
+    .contact button:hover {
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 48px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(58,124,99,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-stats {
+      display: flex;
+      gap: 32px;
+      font-size: 13px;
+    }
+
+    .footer-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-stat-label {
+      color: var(--text-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .footer-stat-value {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .footer-stat-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .live-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .chatbot-button {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #3A7C63;
+      color: white;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.25);
+      z-index: 9999;
+      transition: transform 0.2s ease;
+    }
+
+    .chatbot-button:hover {
+      transform: scale(1.1);
+    }
+
+    .chatbot-window {
+      position: fixed;
+      bottom: 100px;
+      right: 24px;
+      width: 300px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.18);
+      padding: 16px;
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 9999;
+    }
+
+    .chatbot-header {
+      font-weight: 600;
+      font-size: 15px;
+      color: #1f2933;
+    }
+
+    .chatbot-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .chatbot-btn {
+      flex: 1;
+      padding: 8px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: #E0EFE9;
+      color: #1f2933;
+      font-size: 13px;
+      transition: transform 0.2s ease;
+    }
+
+    .chatbot-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .chatbot-input {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chatbot-input input {
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+    }
+
+    .chatbot-input button {
+      padding: 8px;
+      border-radius: 10px;
+      border: none;
+      background: #3A7C63;
+      color: white;
+      cursor: pointer;
+    }
+
+    .chatbot-response {
+      font-size: 13px;
+      color: #6b7280;
+      display: none;
+    }
+
+    .chatbot-suggestions {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chatbot-suggestion {
+      padding: 8px;
+      background: #F3F4F6;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s ease;
+    }
+
+    .chatbot-suggestion:hover {
+      background: #E5E7EB;
+    }
+
+    .chatbot-guide {
+      display: none;
+      gap: 8px;
+    }
 
     @media (max-width: 900px) {
       main {
@@ -580,13 +779,13 @@
         order: -1;
       }
 
-      .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
       nav {
         display: none;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
 
@@ -607,6 +806,16 @@
       h1 {
         font-size: 30px;
       }
+
+      .footer-stats {
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+      }
+
+      .section {
+        padding: 24px 18px;
+      }
     }
   </style>
 </head>
@@ -625,7 +834,7 @@
         <a href="#solutions">Solutions</a>
         <a href="#social">Suivez-nous</a>
         <a href="#contact">Contact</a>
-        <a href="#contact" class="nav-cta">
+        <a href="solutions.html" class="nav-cta">
           Découvrir VERTHEX
           <span>↗</span>
         </a>
@@ -633,7 +842,6 @@
     </header>
 
     <main>
-      <!-- Colonne texte -->
       <section>
         <div class="eyebrow">
           <div class="eyebrow-dot">◎</div>
@@ -646,19 +854,14 @@
         <p class="hero-subtitle">
           VERTHEX conçoit des fermes urbaines modulaires, silencieuses et esthétiques,
           pensées pour les espaces restreints. Cultivez vos herbes, feuilles et micro-pousses
-          à l’année, directement chez vous.
+          à l'année, directement chez vous.
         </p>
 
         <div class="hero-actions">
-          <button class="btn-primary">
-            Je veux voir la solution
+          <a href="solutions.html" class="btn-primary">
+            Voir nos solutions
             <span>→</span>
-          </button>
-          <!--<button class="btn-secondary">
-            Comprendre le concept
-          </button>-->
-
-          <!-- Bouton mailto pour envoyer une demande -->
+          </a>
           <a href="mailto:verthex.information@gmail.com?subject=Demande%20d'information%20VERTHEX" class="btn-secondary">
             Faire une demande
           </a>
@@ -680,7 +883,6 @@
         </div>
       </section>
 
-      <!-- Colonne visuel / produit -->
       <section>
         <div class="hero-card">
           <div class="hero-card-tag">...</div>
@@ -690,7 +892,7 @@
               <div class="hero-card-title">Module vertical pour salon</div>
               <div class="hero-card-sub">
                 Une ferme compacte, silencieuse et autonome,
-                pensée pour s’intégrer à votre intérieur.
+                pensée pour s'intégrer à votre intérieur.
               </div>
             </div>
             <div class="card-badge">
@@ -746,24 +948,21 @@
             </span>
             <span>
               Intéressé par le produit ?
-              <strong>Allez dès maitnenant dans la rubrique "Achat"</strong>
+              <strong>Allez dès maintenant dans la rubrique "Achat"</strong>
             </span>
           </div>
         </div>
       </section>
     </main>
 
-    <!-- Section concept -->
     <section id="concept" class="section">
       <div class="section-header">
-        <div>
-          <div class="section-kicker">Le concept VERTHEX</div>
-          <h2 class="section-title">Cultiver en ville, sans compromis.</h2>
-        </div>
+        <div class="section-kicker">Le concept VERTHEX</div>
+        <h2 class="section-title">Cultiver en ville, sans compromis.</h2>
         <p class="section-desc">
           VERTHEX repense le potager pour les espaces urbains : des modules
-          verticaux, modulaires et silencieux, qui s’intègrent dans un salon,
-          une cuisine ou un bureau sans envahir l’espace.
+          verticaux, modulaires et silencieux, qui s'intègrent dans un salon,
+          une cuisine ou un bureau sans envahir l'espace.
         </p>
       </div>
 
@@ -772,9 +971,9 @@
           <div class="card-label">Espace</div>
           <div class="card-title">Optimisé pour les appartements</div>
           <p>
-            Chaque module occupe moins d’un mètre carré au sol, tout en
-            proposant plusieurs niveaux de culture. L’objectif : maximiser
-            la surface cultivable, pas l’encombrement.
+            Chaque module occupe moins d'un mètre carré au sol, tout en
+            proposant plusieurs niveaux de culture. L'objectif : maximiser
+            la surface cultivable, pas l'encombrement.
           </p>
         </article>
 
@@ -783,8 +982,8 @@
           <div class="card-title">Pensé pour le quotidien</div>
           <p>
             Remplir le réservoir, insérer les capsules, récolter. VERTHEX
-            vise une expérience simple, guidée et calme, que l’on oublie
-            jusqu’au moment de cuisiner.
+            vise une expérience simple, guidée et calme, que l'on oublie
+            jusqu'au moment de cuisiner.
           </p>
         </article>
 
@@ -792,12 +991,13 @@
           <div class="card-label">Design</div>
           <div class="card-title">Objet décoratif avant tout</div>
           <p>
-            L’esthétique est au cœur du projet : lignes sobres, lumière douce,
+            L'esthétique est au cœur du projet : lignes sobres, lumière douce,
             matériaux qualitatifs. Une pièce qui a sa place dans un intérieur
             moderne.
           </p>
         </article>
-      </div>
+
+         </div>
     </section>
 
     <!-- Section solutions -->
